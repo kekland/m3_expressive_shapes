@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' hide Cubic;
 import 'package:m3_expressive_shapes/rounded_polygon_to_path.dart';
 import 'package:m3_expressive_shapes/shapes/_shapes.dart';
@@ -47,5 +48,18 @@ class RoundedPolygonBorder extends ShapeBorder {
     }
 
     return super.lerpTo(b, t);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! RoundedPolygonBorder) return false;
+
+    return polygon == other.polygon && listEquals(cubics, other.cubics);
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(polygon, Object.hashAll(cubics));
   }
 }
